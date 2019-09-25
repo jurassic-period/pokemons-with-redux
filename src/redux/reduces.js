@@ -1,8 +1,7 @@
-const reducer = (state = {loading: true}, action) => {
+const reducer = (state = [], action) => {
     switch (action.type) {
-      case "CHANGE_LOADING":
-          const test = {...state, loading: false};
-        return state = test;
+      case "FULL_DATA_POKEMONS":
+        return state = [...state, action.dataAllPokemons];
       default:
         return state;
     }

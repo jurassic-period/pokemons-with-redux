@@ -1,8 +1,9 @@
 import React from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
-import {loading} from '../redux/action';
-import store from '../redux/store';
+import { connect } from 'react-redux';
+import * as action from '../redux/action';
+import { bindActionCreators } from 'redux';
 
 const LIMIT_PER_PAGE = 20;
 
@@ -36,13 +37,9 @@ class MainComponent extends React.Component {
       responses.map(resp => resp.json())
     );
 
-    // ____________________________________________
-    // await store.dispatch(loading);
-    // store.subscribe(() => console.log(store.getState()));
-    // ____________________________________________
     this.setState({
       pokemonArr: dataAllPokemons,
-      // loading: false,
+      loading: false,
       count: dataUrl.count
     });
   }
@@ -53,13 +50,11 @@ class MainComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.toDownloadData();
+    // this.toDownloadData();
+    
   }
 
   render() {
-    console.log(loading);
-    store.dispatch(loading());
-    store.subscribe(() => console.log(store.getState()));
 
     const amountPage = Math.ceil(this.state.count / LIMIT_PER_PAGE);
     return (
@@ -83,4 +78,20 @@ class MainComponent extends React.Component {
   }
 }
 
-export default MainComponent;
+
+
+const mapDispatchToProps = (dispatch) => {
+
+  const { loading } = bindActionCreators(action, dispatch);
+    return {
+      loading
+    }
+};
+const mapStateToProps = (state) => {
+  return {
+    pokemonArr: state
+  }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainComponent);

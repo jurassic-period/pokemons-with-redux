@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import { connect } from 'react-redux';
-import * as action from '../redux/action';
+import { loading } from '../redux/action';
 import { bindActionCreators } from 'redux';
 
 const LIMIT_PER_PAGE = 20;
@@ -21,75 +21,75 @@ class MainComponent extends React.Component {
     this.toChangeUrl = this.toChangeUrl.bind(this);
   }
 
-  async toDownloadData() {
-    const url = `https://pokeapi.co/api/v2/pokemon/?offset=${this.state.offset}&limit=${LIMIT_PER_PAGE}`;
-    const responseUrl = await fetch(url);
-    const dataUrl = await responseUrl.json();
-    const promises = [];
+  // async toDownloadData() {
+  //   const url = `https://pokeapi.co/api/v2/pokemon/?offset=${this.state.offset}&limit=${LIMIT_PER_PAGE}`;
+  //   const responseUrl = await fetch(url);
+  //   const dataUrl = await responseUrl.json();
+  //   const promises = [];
 
-    for (let i = 0; i < dataUrl.results.length; i++) {
-      const currentPokemonUrl = dataUrl.results[i].url;
-      promises.push(fetch(currentPokemonUrl));
-    }
+  //   for (let i = 0; i < dataUrl.results.length; i++) {
+  //     const currentPokemonUrl = dataUrl.results[i].url;
+  //     promises.push(fetch(currentPokemonUrl));
+  //   }
 
-    const responses = await Promise.all(promises);
-    const dataAllPokemons = await Promise.all(
-      responses.map(resp => resp.json())
-    );
+  //   const responses = await Promise.all(promises);
+  //   const dataAllPokemons = await Promise.all(
+  //     responses.map(resp => resp.json())
+  //   );
 
-    this.setState({
-      pokemonArr: dataAllPokemons,
-      loading: false,
-      count: dataUrl.count
-    });
-  }
+  //   this.setState({
+  //     pokemonArr: dataAllPokemons,
+  //     loading: false,
+  //     count: dataUrl.count
+  //   });
+  // }
 
   toChangeUrl(page) {
     const apiPage = page * LIMIT_PER_PAGE - 20;
     this.setState({ offset: apiPage }, this.toDownloadData);
   }
 
+
   componentDidMount() {
-    // this.toDownloadData();
-    
+    // console.log('pokemonARRAY', this.props.pokemonArr);
+    this.props.pokemonsData(this.state.offset, LIMIT_PER_PAGE);
+    console.log('thisProps', this.props);
+    // this.props.actions.loading(0, 20);
+ 
   }
 
   render() {
-
     const amountPage = Math.ceil(this.state.count / LIMIT_PER_PAGE);
+    
     return (
       <div className="container">
-        {this.state.loading ? (
-          <div>loading...</div>
+        {this.props.pokemonsArr ? (
+          <div>loading... </div>
         ) : (
-          <div className="row">
-            {this.state.pokemonArr.map(el => (
-              <Card el={el} key={el.name} />
-            ))}
-            <Pagination
-              toChangeUrl={this.toChangeUrl}
-              amountPage={amountPage}
-              stateFromMainComp={this.state}
-            />
-          </div>
+          // <div className="row">
+          //   {this.props.pokemonsArr.map(el => (
+          //     <Card el={el} key={el.name} />
+          //   ))}
+          //   <Pagination
+          //     toChangeUrl={this.toChangeUrl}
+          //     amountPage={amountPage}
+          //     stateFromMainComp={this.state}
+          //   />
+          // </div>
+          <div>{this.props.pokemonsArr[0][0].name}</div>
         )}
       </div>
     );
   }
 }
 
-
-
 const mapDispatchToProps = (dispatch) => {
-
-  const { loading } = bindActionCreators(action, dispatch);
-    return {
-      loading
-    }
+  // return {actions: bindActionCreators(actions, dispatch)}; 
+  return { pokemonsData: (offset, limit) => dispatch(loading(offset, limit))};
 };
 const mapStateToProps = (state) => {
   return {
-    pokemonArr: state
+    pokemonsArr: state.pokemons
   }
 };
 

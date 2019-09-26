@@ -4,15 +4,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import reducer from "./redux/reduces";
 import { Provider } from "react-redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
 const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  combineReducers({pokemons: reducer}),
+  composeWithDevTools(applyMiddleware(thunk))
 );
-store.subscribe(() => console.log(store.getState()));
+store.subscribe(() => console.log('Store-subscribe', store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>

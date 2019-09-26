@@ -1,5 +1,8 @@
 import React from "react";
-import {Router, Route, NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../redux/action';
 
 class WelcomePage extends React.Component {
   constructor(props) {
@@ -7,10 +10,15 @@ class WelcomePage extends React.Component {
   }
 
   render() {
+    console.log(this.props.actions)
     return (
-        <NavLink to="/main" className="passive"><i className="fas fa-basketball-ball fa-spin"></i></NavLink>
+        <NavLink onClick={() => this.props.actions} to="/main" className="passive"><i className="fas fa-basketball-ball fa-spin"></i></NavLink>
     );
   }
 }
 
-export default WelcomePage;
+const mapDispatchToProps = (dispatch) => {
+  return {actions: bindActionCreators(actions, dispatch)}; 
+};
+
+export default connect(mapDispatchToProps)(WelcomePage);

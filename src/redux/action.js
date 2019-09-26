@@ -23,7 +23,7 @@
 //   };
 
 export function loading(offset, limit) {
-  return async () => {
+  return async (dispatch) => {
     const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
     const responseUrl = await fetch(url);
     const dataUrl = await responseUrl.json();
@@ -39,6 +39,6 @@ export function loading(offset, limit) {
       responses.map(resp => resp.json())
     );
 
-    return ({ type: "FULL_DATA_POKEMONS", dataAllPokemons });
+    dispatch ({ type: "FULL_DATA_POKEMONS", dataAllPokemons });
   }
 };

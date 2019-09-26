@@ -1,9 +1,8 @@
 import React from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
-import { connect } from 'react-redux';
-import { loading } from '../redux/action';
-import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
+import { loading } from "../redux/action";
 
 const LIMIT_PER_PAGE = 20;
 
@@ -46,52 +45,54 @@ class MainComponent extends React.Component {
 
   toChangeUrl(page) {
     const apiPage = page * LIMIT_PER_PAGE - 20;
-    this.setState({ offset: apiPage }, this.toDownloadData);
+    this.setState({ offset: apiPage }, () =>
+      this.props.pokemonsData(this.state.offset, LIMIT_PER_PAGE)
+    );
   }
 
-
   componentDidMount() {
-    // console.log('pokemonARRAY', this.props.pokemonArr);
     this.props.pokemonsData(this.state.offset, LIMIT_PER_PAGE);
-    console.log('thisProps', this.props);
-    // this.props.actions.loading(0, 20);
- 
+    // console.log('thisProps', this.props);
   }
 
   render() {
     const amountPage = Math.ceil(this.state.count / LIMIT_PER_PAGE);
-    
+    console.log("offset: ", this.state.offset);
+
     return (
       <div className="container">
-        {this.props.pokemonsArr ? (
+        {!this.props.pokemonsArr[0] ? (
           <div>loading... </div>
         ) : (
-          // <div className="row">
-          //   {this.props.pokemonsArr.map(el => (
-          //     <Card el={el} key={el.name} />
-          //   ))}
-          //   <Pagination
-          //     toChangeUrl={this.toChangeUrl}
-          //     amountPage={amountPage}
-          //     stateFromMainComp={this.state}
-          //   />
-          // </div>
-          <div>{this.props.pokemonsArr[0][0].name}</div>
+          <div className="row">
+            {this.props.pokemonsArr[this.props.pokemonsArr.length - 1].map(
+              el => (
+                <Card el={el} key={el.name} />
+              )
+            )}
+            <Pagination
+              toChangeUrl={this.toChangeUrl}
+              amountPage={amountPage}
+              stateFromMainComp={this.state}
+            />
+          </div>
         )}
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  // return {actions: bindActionCreators(actions, dispatch)}; 
-  return { pokemonsData: (offset, limit) => dispatch(loading(offset, limit))};
+const mapDispatchToProps = dispatch => {
+  // return {actions: bindActionCreators(actions, dispatch)};
+  return { pokemonsData: (offset, limit) => dispatch(loading(offset, limit)) };
 };
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     pokemonsArr: state.pokemons
-  }
+  };
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainComponent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainComponent);

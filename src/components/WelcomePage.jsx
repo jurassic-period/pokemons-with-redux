@@ -10,15 +10,10 @@ class WelcomePage extends React.Component {
   }
 
   render() {
-    console.log(this.props.actions)
     return (
-        <NavLink onClick={() => this.props.actions} to="/main" className="passive"><i className="fas fa-basketball-ball fa-spin"></i></NavLink>
+        <NavLink to="/main" className="passive"><i className="fas fa-basketball-ball fa-spin"></i></NavLink>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {actions: bindActionCreators(actions, dispatch)}; 
-};
-
-export default connect(mapDispatchToProps)(WelcomePage);
+export default WelcomePage;

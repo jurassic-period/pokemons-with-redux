@@ -31,7 +31,11 @@ class Card extends React.Component {
             <img className="hide-img" src={img} alt="picture" />
           )}
           {this.props.el.sprites.back_default ? (
-            <img src={this.props.el.sprites.back_default} alt="picture" />
+            <img
+              src={this.props.el.sprites.back_default}
+              alt="picture"
+              className="second-img"
+            />
           ) : null}
         </div>
       </div>

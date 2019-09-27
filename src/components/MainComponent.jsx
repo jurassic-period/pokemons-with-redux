@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 import { connect } from "react-redux";
 import { loading } from "../redux/action";
 import Header from "./Header";
+import Form from "./Form";
 
 const LIMIT_PER_PAGE = 20;
 
@@ -68,11 +69,10 @@ class MainComponent extends React.Component {
           <div>loading... </div>
         ) : (
           <div className="row">
-            {this.props.pokemonsArr.map(
-              el => (
-                <Card el={el} key={el.name} />
-              )
-            )}
+            {this.props.pokemonsArr.map(el => (
+              <Card el={el} key={el.name} />
+            ))}
+            <Form />
             <Pagination
               toChangeUrl={this.toChangeUrl}
               amountPage={amountPage}

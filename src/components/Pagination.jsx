@@ -74,8 +74,7 @@ class Pagination extends React.Component {
   }
 
   render() {
-    return (
-      this.props.amountPage <= 1? null :
+    return this.props.amountPage <= 1 ? null : (
       <div className="col-12 pagination">
         <i
           className="fa fa-angle-double-left"

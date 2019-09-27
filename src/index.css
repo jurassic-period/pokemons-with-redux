@@ -152,6 +152,22 @@ img {
   color: white;
   background-color: rgb(14, 133, 93);
 }
+/* _________________________Form______________________________ */
+
+.form-wrapper {
+  background-color: #6c757d;
+  color: black;
+  margin: 3px 0px 3px 0px;
+  
+}
+.form-wrapper a {
+  text-decoration: none;
+  color: black;
+}
+
+
+
+
 
 /* ---------------------- Media Queries ---------------------- */
 

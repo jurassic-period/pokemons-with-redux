@@ -24,6 +24,8 @@ class PokemonPage extends React.Component {
   }
 
   render() {
+    // console.log("FromPokemonPageProps", this.props);
+
     return (
       <div className="container">
         {this.state.loading ? (

@@ -6,9 +6,7 @@ class Header extends React.Component {
   }
 
   render() {
-    return (
-        <h2>Table of POKEMONS</h2>
-    );
+    return <h2>Table of POKEMONS</h2>;
   }
 }
 

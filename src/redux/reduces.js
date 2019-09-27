@@ -1,11 +1,17 @@
-const reducer = (state = [], action) => {
+export const reducer = (state = [], action) => {
   switch (action.type) {
     case "FULL_DATA_POKEMONS":
-      console.log("state в редьюсере", state);
-      return (state = [...state, action.dataAllPokemons]);
+      return action.dataAllPokemons;
     default:
       return state;
   }
 };
 
-export default reducer;
+export const countReducer = (state = 0, action) => {
+  switch (action.type) {
+    case "AMOUNT_POKEMONS":
+      return action.count;
+    default:
+      return state;
+  }
+};

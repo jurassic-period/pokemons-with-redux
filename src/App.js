@@ -17,7 +17,6 @@ function App() {
             <Route path="/" exact component={WelcomePage} />
             <Route path="/main" component={MainComponent} />
             <Route path="/pokemon-page/:name" component={PokemonPage} />
-
             <Route render={() => <h3>Not Found</h3>} />
           </Switch>
         </header>
@@ -26,7 +25,7 @@ function App() {
   );
 
   // function Child({ match }) {
-  //   console.log('vot', match);
+  //   console.log(match);
   //   return (
   //     <div>
   //       <PokemonPage match={match}/>

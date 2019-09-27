@@ -75,6 +75,7 @@ class Pagination extends React.Component {
 
   render() {
     return (
+      this.props.amountPage <= 1? null :
       <div className="col-12 pagination">
         <i
           className="fa fa-angle-double-left"
@@ -99,7 +100,7 @@ class Pagination extends React.Component {
         <div className="input">
           <input
             type="text"
-            placeholder={"Last page:" + this.props.amountPage}
+            placeholder={"Last: " + this.props.amountPage}
             onChange={this.toSaveInputMean}
           />
           <a href="#" onClick={this.toRunInputOrStop}>

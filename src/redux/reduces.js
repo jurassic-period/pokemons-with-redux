@@ -15,3 +15,12 @@ export const countReducer = (state = 0, action) => {
       return state;
   }
 };
+
+export const userFeedbackReducer = (state = [], action) => {
+  switch (action.type) {
+    case "USER_FEEDBACK":
+      return action.user;
+    default:
+      return state;
+  }
+};

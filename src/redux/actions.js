@@ -21,13 +21,9 @@ export function loading(offset, limit) {
   };
 }
 
-// export function amountOfPokemons() {
-//   return async dispatch => {
-//     const url = "https://pokeapi.co/api/v2/pokemon/";
-//     const responseUrl = await fetch(url);
-//     const dataUrl = await responseUrl.json();
-//     const { count } = dataUrl;
-
-//     dispatch({ type: "AMOUNT_POKEMONS", count });
-//   };
-// }
+export function userFeedback(name, email, message) {
+  return dispatch => {
+    const user = { name: name, email: email, message: message };
+    dispatch({ type: "USER_FEEDBACK", user });
+  };
+}

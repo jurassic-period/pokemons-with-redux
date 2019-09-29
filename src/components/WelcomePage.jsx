@@ -1,8 +1,5 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../redux/action';
+import { NavLink } from "react-router-dom";
 
 class WelcomePage extends React.Component {
   constructor(props) {
@@ -11,7 +8,9 @@ class WelcomePage extends React.Component {
 
   render() {
     return (
-        <NavLink to="/main" className="passive"><i className="fas fa-basketball-ball fa-spin"></i></NavLink>
+      <NavLink to="/main" className="passive">
+        <i className="fas fa-basketball-ball fa-spin"></i>
+      </NavLink>
     );
   }
 }

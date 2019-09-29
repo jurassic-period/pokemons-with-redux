@@ -155,19 +155,49 @@ img {
 /* _________________________Form______________________________ */
 
 .form-wrapper {
-  background-color: #6c757d;
-  color: black;
-  margin: 3px 0px 3px 0px;
+  background-color: #6b858a;
+  color: #282c34;
+  margin: 2px 0px 30px 0px;
+  font-size: 25px;
+  padding: 14px 10px 6px 10px;
+  border-radius: 14px
   
 }
-.form-wrapper a {
+.form-wrapper button {
   text-decoration: none;
-  color: black;
+  color: #282c34;
+  border: 1px solid #282c34;
+  border-radius: 5px;
+  width: 15%;
 }
-
-
-
-
+.form-wrapper button:hover {
+  color: #6b858a;
+  background-color: #282c34;
+  border: 1px solid #282c34;
+  border-radius: 5px;
+  transition: all 0.4s ease-out;
+}
+.form-wrapper button:focus {
+  outline: 0;
+}
+.form-wrapper button:active {
+  box-shadow: inset 0px 0px 15px #6b858a;
+  transition: all 0.1s ease-out;
+}
+.form-wrapper input {
+  margin: 0 10px 0 5px;
+  border-radius: 6px;
+  height: 34px;
+  width: 100%;
+}
+.form-wrapper textarea {
+  border-radius: 6px;
+  width: 98%;
+  font-size: 18px;
+}
+.inputs-block {
+  margin-top: 20px;
+}
 
 /* ---------------------- Media Queries ---------------------- */
 

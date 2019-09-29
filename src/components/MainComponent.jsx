@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import { connect } from "react-redux";
-import { loading } from "../redux/action";
+import { loading } from "../redux/actions";
 import Header from "./Header";
 import Form from "./Form";
 
@@ -52,15 +52,12 @@ class MainComponent extends React.Component {
 
   componentDidMount() {
     this.props.pokemonsData(+this.state.offset, LIMIT_PER_PAGE);
-    // const toGetCount = () =>
-    //   this.props.countNum? null : this.props.count();
-    // toGetCount();
   }
 
   render() {
     const amountPage = Math.ceil(this.props.countNum / LIMIT_PER_PAGE);
     // console.log("amountPage: ", this.state.count);
-    console.log("this.props", this.props);
+    // console.log("this.props", this.props);
 
     return (
       <div className="container">
@@ -72,12 +69,12 @@ class MainComponent extends React.Component {
             {this.props.pokemonsArr.map(el => (
               <Card el={el} key={el.name} />
             ))}
-            <Form />
             <Pagination
               toChangeUrl={this.toChangeUrl}
               amountPage={amountPage}
               stateFromMainComp={this.state}
             />
+            <Form />
           </div>
         )}
       </div>
@@ -86,10 +83,8 @@ class MainComponent extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  // return {actions: bindActionCreators(actions, dispatch)};
   return {
     pokemonsData: (offset, limit) => dispatch(loading(offset, limit))
-    // count: () => dispatch(loading())
   };
 };
 const mapStateToProps = state => {

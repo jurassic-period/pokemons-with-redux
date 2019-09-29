@@ -16,7 +16,7 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div className="col-10 form-wrapper mx-auto">
+      <div className="col-md-10 form-wrapper mx-auto">
         <form>
           <h2>Feedback form</h2>
           <div className="d-flex justify-content-around inputs-block">

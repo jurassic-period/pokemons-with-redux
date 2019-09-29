@@ -168,7 +168,7 @@ img {
   color: #282c34;
   border: 1px solid #282c34;
   border-radius: 5px;
-  width: 15%;
+  width: 90px;
 }
 .form-wrapper button:hover {
   color: #6b858a;
@@ -189,6 +189,7 @@ img {
   border-radius: 6px;
   height: 34px;
   width: 100%;
+  font-size: 19px;
 }
 .form-wrapper textarea {
   border-radius: 6px;
@@ -239,4 +240,16 @@ img {
 .App-header {
     font-size: 23px;
   }
+.inputs-block {
+  flex-direction: column;
+  }
+.form-wrapper input {
+  width: auto;
+}
+.form-wrapper textarea {
+  margin-top: 35px;
+}
+label {
+  margin: 10px 0 -3px 0;
+}
 }

@@ -4,7 +4,6 @@ import MainComponent from "./components/MainComponent";
 import { Router, Route, Switch } from "react-router-dom";
 import PokemonPage from "./components/PokemonPage";
 import history from "./history";
-import Header from "./components/Header";
 import WelcomePage from "./components/WelcomePage";
 
 function App() {
@@ -13,7 +12,6 @@ function App() {
       <div className="App">
         <header className="App-header">
           <Switch>
-            {/* <Route path='/main' component={Header}/> Я добавлю данный компонент в компонент MainComponent, однако если он мне нужен здесь и по этому пути? */}
             <Route path="/" exact component={WelcomePage} />
             <Route path="/main" component={MainComponent} />
             <Route path="/pokemon-page/:name" component={PokemonPage} />
@@ -23,15 +21,6 @@ function App() {
       </div>
     </Router>
   );
-
-  // function Child({ match }) {
-  //   console.log(match);
-  //   return (
-  //     <div>
-  //       <PokemonPage match={match}/>
-  //     </div>
-  //   );
-  // }
 }
 
 export default App;

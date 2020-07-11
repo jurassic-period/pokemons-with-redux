@@ -19,30 +19,6 @@ class MainComponent extends React.Component {
     this.toChangeUrl = this.toChangeUrl.bind(this);
   }
 
-  // Last variant which worked without Redux_____
-  // async toDownloadData() {
-  //   const url = `https://pokeapi.co/api/v2/pokemon/?offset=${this.state.offset}&limit=${LIMIT_PER_PAGE}`;
-  //   const responseUrl = await fetch(url);
-  //   const dataUrl = await responseUrl.json();
-  //   const promises = [];
-
-  //   for (let i = 0; i < dataUrl.results.length; i++) {
-  //     const currentPokemonUrl = dataUrl.results[i].url;
-  //     promises.push(fetch(currentPokemonUrl));
-  //   }
-
-  //   const responses = await Promise.all(promises);
-  //   const dataAllPokemons = await Promise.all(
-  //     responses.map(resp => resp.json())
-  //   );
-
-  //   this.setState({
-  //     pokemonArr: dataAllPokemons,
-  //     loading: false,
-  //     count: dataUrl.count
-  //   });
-  // }
-
   toChangeUrl(page) {
     const apiPage = page * LIMIT_PER_PAGE - 20;
     this.setState({ offset: apiPage }, () =>
@@ -56,8 +32,6 @@ class MainComponent extends React.Component {
 
   render() {
     const amountPage = Math.ceil(this.props.countNum / LIMIT_PER_PAGE);
-    // console.log("amountPage: ", this.state.count);
-    // console.log("this.props", this.props);
 
     return (
       <div className="container">

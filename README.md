@@ -1,3 +1,3 @@
-Project Pokemons
+## Project Pokemons
 
 Run `npm start`

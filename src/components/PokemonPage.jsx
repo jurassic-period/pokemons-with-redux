@@ -1,31 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
 import history from "../history";
+const URL = 'https://pokeapi.co/api/v2/pokemon/';
 
-class PokemonPage extends React.Component {
-  constructor(props) {
-    super(props);
+class PokemonPage extends Component {
+  state = {
+    loading: true,
+    pokemonData: {}
+  };
 
-    this.state = {
-      loading: true,
-      pokemonData: {}
-    };
-  }
-
-  async toDownloadData() {
-    const url = `https://pokeapi.co/api/v2/pokemon/${this.props.match.params.name}`;
+  async getData() {
+    const { name } = this.props.match.params;
+    const url = `${URL}${name}`;
     const responseUrl = await fetch(url);
     const dataUrl = await responseUrl.json();
-
     this.setState({ pokemonData: dataUrl, loading: false });
   }
 
   componentDidMount() {
-    this.toDownloadData();
+    this.getData();
   }
 
   render() {
-    // console.log("FromPokemonPageProps", this.props);
-
+    const { pokemonData } = this.state;
     return (
       <div className="container">
         {this.state.loading ? (
@@ -33,44 +29,43 @@ class PokemonPage extends React.Component {
         ) : (
           <div className="row">
             <div className="col-6">
-              {this.state.pokemonData.sprites.front_default ? (
+              {pokemonData.sprites.front_default ? (
                 <img
                   className="individual__img"
-                  src={this.state.pokemonData.sprites.front_default}
-                  alt="image"
+                  src={pokemonData.sprites.front_default}
+                  alt=""
                 />
               ) : (
                 <p>Sorry we havn't images of this pokemon</p>
               )}
             </div>
             <div className="col-6">
-              {this.state.pokemonData.sprites.back_default ? (
+              {pokemonData.sprites.back_default && (
                 <img
                   className="individual__img"
-                  src={this.state.pokemonData.sprites.back_default}
-                  alt="image"
+                  src={pokemonData.sprites.back_default}
+                  alt=""
                 />
-              ) : null}
+              )}
             </div>
             <div className="col individual">
               <p className="individual__text">
-                {this.state.pokemonData.name[0].toUpperCase() +
-                  this.state.pokemonData.name.slice(1)}
+                {pokemonData.name[0].toUpperCase() +
+                  pokemonData.name.slice(1)}
               </p>
-              <p>{"Waight: " + this.state.pokemonData.weight + "kg"}</p>
+              <p>{"Waight: " + pokemonData.weight + "kg"}</p>
               <ul className="individual__list">
                 Abilities:
                 <li>
-                  {"1. " + this.state.pokemonData.abilities[0].ability.name}
+                  {"1. " + pokemonData.abilities[0].ability.name}
                 </li>
                 <li>
-                  {this.state.pokemonData.abilities[1]
-                    ? "2. " + this.state.pokemonData.abilities[1].ability.name
-                    : null}
+                  {pokemonData.abilities[1]
+                    && "2. " + pokemonData.abilities[1].ability.name}
                 </li>
               </ul>
               <p>
-                {"Base experience: " + this.state.pokemonData.base_experience}
+                {"Base experience: " + pokemonData.base_experience}
               </p>
             </div>
           </div>

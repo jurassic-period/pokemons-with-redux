@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import { connect } from "react-redux";
@@ -8,18 +8,12 @@ import Form from "./Form";
 
 const LIMIT_PER_PAGE = 20;
 
-class MainComponent extends React.Component {
-  constructor(props) {
-    super(props);
+class MainComponent extends Component {
+  state = {
+    offset: 0
+  };
 
-    this.state = {
-      offset: 0
-    };
-
-    this.toChangeUrl = this.toChangeUrl.bind(this);
-  }
-
-  toChangeUrl(page) {
+  toChangeUrl = (page) => {
     const apiPage = page * LIMIT_PER_PAGE - 20;
     this.setState({ offset: apiPage }, () =>
       this.props.pokemonsData(this.state.offset, LIMIT_PER_PAGE)
@@ -32,15 +26,13 @@ class MainComponent extends React.Component {
 
   render() {
     const amountPage = Math.ceil(this.props.countNum / LIMIT_PER_PAGE);
-
+    const { pokemonsArr } = this.props;
     return (
       <div className="container">
         <Header />
-        {!this.props.pokemonsArr[0] ? (
-          <div>loading... </div>
-        ) : (
+        {pokemonsArr.length ? (
           <div className="row">
-            {this.props.pokemonsArr.map(el => (
+            {pokemonsArr.map(el => (
               <Card el={el} key={el.name} />
             ))}
             <Pagination
@@ -50,7 +42,7 @@ class MainComponent extends React.Component {
             />
             <Form />
           </div>
-        )}
+        ) : <div>loading... </div>}
       </div>
     );
   }

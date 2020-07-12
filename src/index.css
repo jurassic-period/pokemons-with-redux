@@ -118,18 +118,20 @@ img {
   border: none;
   font-size: 17px;
   background-color: #dee2e6;
+  border-right: 1px solid rgb(14, 133, 93);
 }
-.input a {
+.input button {
   color: white;
-  padding: 0 5px 1px 5px;
+  background-color: rgb(14, 133, 93);
+  border-color: rgb(14, 133, 93);
+  border-radius: 0;
 }
-.input a:hover {
-  text-decoration: none;
+.input button:hover {
   color: rgb(14, 133, 93);
+  border-color: white;
   background-color: white;
-  border-left: 1px solid rgb(14, 133, 93);
 }
-.input a:active {
+.input button:active {
   background-color: rgb(14, 133, 93);
   color: white;
 }
@@ -147,17 +149,19 @@ img {
 .individual__button {
   color: rgb(14, 133, 93);
   background-color: transparent;
+  border: 1px solid rgb(14, 133, 93)
 }
 .individual__button:hover {
   color: white;
+  border: 1px solid rgb(14, 133, 93);
   background-color: rgb(14, 133, 93);
 }
 /* _________________________Form______________________________ */
 
 .form-wrapper {
-  background-color: #6b858a;
+  background-color: rgb(14, 133, 93);;
   color: #282c34;
-  margin: 2px 0px 30px 0px;
+  margin: 10px 0px 30px 0px;
   font-size: 25px;
   padding: 14px 10px 6px 10px;
   border-radius: 14px
@@ -165,14 +169,15 @@ img {
 }
 .form-wrapper button {
   text-decoration: none;
-  color: #282c34;
+  background-color: #282c34;
   border: 1px solid #282c34;
   border-radius: 5px;
+  margin-top: 10px;
   width: 90px;
 }
 .form-wrapper button:hover {
-  color: #6b858a;
-  background-color: #282c34;
+  background-color: #ffffff;
+  color: #282c34;
   border: 1px solid #282c34;
   border-radius: 5px;
   transition: all 0.4s ease-out;

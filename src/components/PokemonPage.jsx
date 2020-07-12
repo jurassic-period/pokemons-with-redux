@@ -5,7 +5,7 @@ const URL = 'https://pokeapi.co/api/v2/pokemon/';
 class PokemonPage extends Component {
   state = {
     loading: true,
-    pokemonData: {}
+    pokemonData: {},
   };
 
   async getData() {
@@ -72,7 +72,7 @@ class PokemonPage extends Component {
         )}
         <div>
           <button
-            className="individual__button"
+            className="individual__button btn btn-primary"
             onClick={() => history.push("/main")}
           >
             Go back

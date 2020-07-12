@@ -13,7 +13,6 @@ const store = createStore(
   combineReducers({ pokemons: reducer, count: countReducer, userFeedback: userFeedbackReducer }),
   composeWithDevTools(applyMiddleware(thunk))
 );
-store.subscribe(() => console.log("Store-subscribe", store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>

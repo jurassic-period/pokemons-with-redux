@@ -1,18 +1,12 @@
 import React from "react";
 
 class Pagination extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    activePage: 1,
+    inputMean: 0
+  };
 
-    this.state = {
-      activePage: 1,
-      inputMean: 0
-    };
-    this.toSaveInputMean = this.toSaveInputMean.bind(this);
-    this.toRunInputOrStop = this.toRunInputOrStop.bind(this);
-  }
-
-  toClickPage(page) {
+  toClickPage = (page) => {
     this.setState(
       {
         activePage: page
@@ -20,22 +14,8 @@ class Pagination extends React.Component {
       () => this.props.toChangeUrl(page)
     );
   }
-  //  __________Different way with creating array for all pages__________
-  // toMakePagination(currentPage, amountPage) {
-  //   const allPagesArr = [];
-  //   for (let i = 1; i <= amountPage; i++) {
-  //     allPagesArr.push({ page: i });
-  //   }
-  //   if (currentPage <= 3 || currentPage > amountPage - 4) {
-  //     return currentPage <= 3
-  //       ? allPagesArr.slice(0, 5)
-  //       : allPagesArr.slice(amountPage - 5, amountPage);
-  //   } else {
-  //     return allPagesArr.slice(currentPage - 3, currentPage + 2);
-  //   }
-  // }
 
-  toMakePagination(currentPage, amountPage) {
+  makePagination = (currentPage, amountPage) => {
     const resultArr = [];
     if (currentPage < 3) {
       for (let i = 1; i <= 5; i++) {
@@ -55,7 +35,7 @@ class Pagination extends React.Component {
     return resultArr;
   }
 
-  toSaveInputMean(e) {
+  saveInputMean = (e) => {
     let page = +e.target.value;
     if (page < 1) {
       page = 1;
@@ -67,7 +47,7 @@ class Pagination extends React.Component {
     });
   }
 
-  toRunInputOrStop() {
+  runInputOrStop = () => {
     if (this.state.inputMean) {
       this.toClickPage(this.state.inputMean);
     }
@@ -80,7 +60,7 @@ class Pagination extends React.Component {
           className="fa fa-angle-double-left"
           onClick={() => this.toClickPage(1)}
         ></i>
-        {this.toMakePagination(
+        {this.makePagination(
           this.state.activePage,
           this.props.amountPage
         ).map(el => (
@@ -100,11 +80,11 @@ class Pagination extends React.Component {
           <input
             type="text"
             placeholder={"Last: " + this.props.amountPage}
-            onChange={this.toSaveInputMean}
+            onChange={this.saveInputMean}
           />
-          <a href="#" onClick={this.toRunInputOrStop}>
+          <button className="btn btn-primary" onClick={this.runInputOrStop}>
             Go
-          </a>
+          </button>
         </div>
       </div>
     );

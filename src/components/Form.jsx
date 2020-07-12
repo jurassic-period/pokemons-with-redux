@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { userFeedback } from "../redux/actions";
 
 class Form extends React.Component {
@@ -16,7 +15,7 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div className="col-md-10 form-wrapper mx-auto">
+      <div className="form-group col-md-10 form-wrapper mx-auto">
         <form>
           <h2>Feedback form</h2>
           <div className="d-flex justify-content-around inputs-block">
@@ -24,6 +23,7 @@ class Form extends React.Component {
             <input
               id="name"
               type="text"
+              className="form-control"
               name="name"
               onChange={e => {
                 this.setState({ name: e.target.value });
@@ -34,6 +34,7 @@ class Form extends React.Component {
               id="email"
               type="email"
               name="email"
+              className="form-control"
               onChange={e => {
                 this.setState({ email: e.target.value });
               }}
@@ -43,12 +44,14 @@ class Form extends React.Component {
             name="comment"
             id="message"
             placeholder="Put your message"
+            className="form-control"
             onChange={e => {
               this.setState({ message: e.target.value });
             }}
           ></textarea>
           <button
             type="button"
+            className="form-btn btn btn-primary"
             onClick={() =>
               this.props.feedback(
                 this.state.name,
